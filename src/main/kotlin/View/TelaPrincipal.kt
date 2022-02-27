@@ -1,7 +1,9 @@
 package View
 
 import Model.Tabuleiro
+import Model.TabuleiroEvento
 import javax.swing.JFrame
+import javax.swing.SwingUtilities
 
 fun main(args: Array<String>) {
     TelaPrincipal()
@@ -21,5 +23,14 @@ class TelaPrincipal : JFrame() {
         defaultCloseOperation = EXIT_ON_CLOSE
         title = "Campo Minado"
         isVisible = true
+    }
+
+    private fun mostrarResultado(evento: TabuleiroEvento) {
+        SwingUtilities.invokeLater {
+            val msg = when (evento) {
+                TabuleiroEvento.VITORIA -> "Você ganhou!"
+                TabuleiroEvento.DERROTA -> "Você perdeu... :P"
+            }
+        }
     }
 }
