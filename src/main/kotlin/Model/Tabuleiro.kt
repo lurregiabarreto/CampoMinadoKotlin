@@ -54,4 +54,10 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             }
         }
     }
+    private fun objetivoAlcancado(): Boolean {
+        var jogadorGanhou = true
+        forEachCampo { if (!it.objetivoAlcancado) jogadorGanhou = false }
+        return jogadorGanhou
+    }
+
 }
