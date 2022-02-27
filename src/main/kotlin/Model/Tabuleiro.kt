@@ -24,4 +24,16 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
     private fun associarVizinhos() {
         forEachCampo { associarVizinhos(it) }
     }
+    private fun associarVizinhos(campo: Campo) {
+        val (linha, coluna) = campo
+        val linhas = arrayOf(linha - 1, linha, linha + 1)
+        val colunas = arrayOf(coluna - 1, coluna, coluna + 1)
+
+        linhas.forEach { l ->
+            colunas.forEach { c ->
+                val atual = campos.getOrNull(l)?.getOrNull(c)
+                atual?.takeIf { campo != it }?.let { campo.addVizinho(it) }
+            }
+        }
+    }
 }
