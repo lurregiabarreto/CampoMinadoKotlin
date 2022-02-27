@@ -22,4 +22,13 @@ class BotaoCampo(private val campo: Campo) : JButton() {
 
         campo.onEvento(this::aplicarEstilo)
     }
+
+    private fun aplicarEstilo(campo: Campo, evento: CampoEvento) {
+        when (evento) {
+            CampoEvento.EXPLOSAO -> aplicarEstiloExplodido()
+            CampoEvento.ABERTURA -> aplicarEstiloAberto()
+            CampoEvento.MARCACAO -> aplicarEstiloMarcado()
+            else -> aplicarEstiloPadrao()
+        }
+    }
 }
