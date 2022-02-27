@@ -54,4 +54,9 @@ class BotaoCampo(private val campo: Campo) : JButton() {
 
         text = if (campo.qtdeVizinhosMinados > 0) campo.qtdeVizinhosMinados.toString() else ""
     }
+    private fun aplicarEstiloMarcado() {
+        background = COR_BG_MARCACAO
+        foreground = Color.BLACK
+        text = "M"
+    }
 }
