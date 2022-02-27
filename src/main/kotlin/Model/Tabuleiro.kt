@@ -21,4 +21,7 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             }
         }
     }
+    private fun associarVizinhos() {
+        forEachCampo { associarVizinhos(it) }
+    }
 }
