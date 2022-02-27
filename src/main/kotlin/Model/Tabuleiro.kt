@@ -36,4 +36,22 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             }
         }
     }
+    private fun sortearMinas() {
+        val gerador = Random()
+
+        var linhaSorteada = -1
+        var colunaSorteada = -1
+        var qtdeMinasAtual = 0
+
+        while (qtdeMinasAtual < this.qtdeMinas) {
+            linhaSorteada = gerador.nextInt(qtdeLinhas)
+            colunaSorteada = gerador.nextInt(qtdeColunas)
+
+            val campoSorteado = campos[linhaSorteada][colunaSorteada]
+            if (campoSorteado.seguro) {
+                campoSorteado.minar()
+                qtdeMinasAtual++
+            }
+        }
+    }
 }
