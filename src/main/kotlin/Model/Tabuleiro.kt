@@ -11,6 +11,7 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
         associarVizinhos()
         sortearMinas()
     }
+
     private fun gerarCampos() {
         for (linha in 0 until qtdeLinhas) {
             campos.add(ArrayList())
@@ -21,9 +22,11 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             }
         }
     }
+
     private fun associarVizinhos() {
         forEachCampo { associarVizinhos(it) }
     }
+
     private fun associarVizinhos(campo: Campo) {
         val (linha, coluna) = campo
         val linhas = arrayOf(linha - 1, linha, linha + 1)
@@ -36,6 +39,7 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             }
         }
     }
+
     private fun sortearMinas() {
         val gerador = Random()
 
@@ -54,10 +58,19 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             }
         }
     }
+
     private fun objetivoAlcancado(): Boolean {
         var jogadorGanhou = true
         forEachCampo { if (!it.objetivoAlcancado) jogadorGanhou = false }
         return jogadorGanhou
+    }
+
+    private fun verificarDerrotaOuVitoria(campo: Campo, evento: CampoEvento) {
+        if (evento == CampoEvento.EXPLOSAO) {
+            callbacks.forEach { it(TabuleiroEvento.DERROTA) }
+        } else if (objetivoAlcancado()) {
+            callbacks.forEach { it(TabuleiroEvento.VITORIA) }
+        }
     }
 
 }
