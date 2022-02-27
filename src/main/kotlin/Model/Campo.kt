@@ -22,6 +22,19 @@ data class Campo(val linha: Int, val coluna: Int) {
     fun addVizinho(vizinho: Campo) {
         vizinhos.add(vizinho)
     }
+
     fun onEvento(callback: (Campo, CampoEvento) -> Unit) {
         callbacks.add(callback)
+    }
+
+    fun abrir() {
+        if (fechado) {
+            aberto = true
+            if (minado) {
+                callbacks.forEach { it(this, CampoEvento.EXPLOSAO) }
+            } else {
+                callbacks.forEach { it(this, CampoEvento.ABERTURA) }
+                vizinhos.filter { it.fechado && it.seguro && vizinhancaSegura }.forEach { it.abrir() }
+            }
+        }
     }
