@@ -46,3 +46,15 @@ data class Campo(val linha: Int, val coluna: Int) {
             callbacks.forEach { it(this, evento) }
         }
     }
+
+    fun minar() {
+        minado = true
+    }
+
+    fun reiniciar() {
+        aberto = false
+        minado = false
+        marcado = false
+        callbacks.forEach { it(this, CampoEvento.REINICIALIZACAO) }
+    }
+}
