@@ -40,4 +40,18 @@ class BotaoCampo(private val campo: Campo) : JButton() {
         background = COR_BG_EXPLOSAO
         text = "X"
     }
+    private fun aplicarEstiloAberto() {
+        background = COR_BG_NORMAL
+        border = BorderFactory.createLineBorder(Color.GRAY)
+
+        foreground = when (campo.qtdeVizinhosMinados) {
+            1 -> COR_TXT_VERDE
+            2 -> Color.BLUE
+            3 -> Color.YELLOW
+            4, 5, 6 -> Color.RED
+            else -> Color.PINK
+        }
+
+        text = if (campo.qtdeVizinhosMinados > 0) campo.qtdeVizinhosMinados.toString() else ""
+    }
 }
