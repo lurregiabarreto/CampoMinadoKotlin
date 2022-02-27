@@ -22,3 +22,6 @@ data class Campo(val linha: Int, val coluna: Int) {
     fun addVizinho(vizinho: Campo) {
         vizinhos.add(vizinho)
     }
+    fun onEvento(callback: (Campo, CampoEvento) -> Unit) {
+        callbacks.add(callback)
+    }
