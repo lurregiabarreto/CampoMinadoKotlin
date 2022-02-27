@@ -1,5 +1,8 @@
 package Model
 
+import java.util.*
+
+
 enum class TabuleiroEvento { VITORIA, DERROTA }
 
 class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas: Int) {
@@ -72,11 +75,18 @@ class Tabuleiro(val qtdeLinhas: Int, val qtdeColunas: Int, private val qtdeMinas
             callbacks.forEach { it(TabuleiroEvento.VITORIA) }
         }
     }
+
     fun forEachCampo(callback: (Campo) -> Unit) {
         campos.forEach { linha -> linha.forEach(callback) }
     }
+
     fun onEvento(callback: (TabuleiroEvento) -> Unit) {
         callbacks.add(callback)
+    }
+
+    fun reiniciar() {
+        forEachCampo { it.reiniciar() }
+        sortearMinas()
     }
 
 }
