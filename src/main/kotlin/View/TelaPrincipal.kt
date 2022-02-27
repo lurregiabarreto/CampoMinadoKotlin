@@ -3,6 +3,7 @@ package View
 import Model.Tabuleiro
 import Model.TabuleiroEvento
 import javax.swing.JFrame
+import javax.swing.JOptionPane
 import javax.swing.SwingUtilities
 
 fun main(args: Array<String>) {
@@ -31,6 +32,11 @@ class TelaPrincipal : JFrame() {
                 TabuleiroEvento.VITORIA -> "Você ganhou!"
                 TabuleiroEvento.DERROTA -> "Você perdeu... :P"
             }
+            JOptionPane.showMessageDialog(this, msg)
+            tabuleiro.reiniciar()
+
+            painelTabuleiro.repaint()
+            painelTabuleiro.validate()
         }
     }
 }
