@@ -1,10 +1,12 @@
 package View
 
 import Model.Campo
+import Model.CampoEvento
 import java.awt.Color
 import java.awt.Font
 import javax.swing.BorderFactory
 import javax.swing.JButton
+import javax.swing.SwingUtilities
 
 private val COR_BG_NORMAL = Color(184, 184, 184)
 private val COR_BG_MARCACAO = Color(8, 179, 247)
@@ -40,6 +42,7 @@ class BotaoCampo(private val campo: Campo) : JButton() {
         background = COR_BG_EXPLOSAO
         text = "X"
     }
+
     private fun aplicarEstiloAberto() {
         background = COR_BG_NORMAL
         border = BorderFactory.createLineBorder(Color.GRAY)
@@ -54,9 +57,16 @@ class BotaoCampo(private val campo: Campo) : JButton() {
 
         text = if (campo.qtdeVizinhosMinados > 0) campo.qtdeVizinhosMinados.toString() else ""
     }
+
     private fun aplicarEstiloMarcado() {
         background = COR_BG_MARCACAO
         foreground = Color.BLACK
         text = "M"
+    }
+
+    private fun aplicarEstiloPadrao() {
+        background = COR_BG_NORMAL
+        border = BorderFactory.createBevelBorder(0)
+        text = ""
     }
 }
