@@ -30,5 +30,14 @@ class BotaoCampo(private val campo: Campo) : JButton() {
             CampoEvento.MARCACAO -> aplicarEstiloMarcado()
             else -> aplicarEstiloPadrao()
         }
+        SwingUtilities.invokeLater {
+            repaint()
+            validate()
+        }
+    }
+
+    private fun aplicarEstiloExplodido() {
+        background = COR_BG_EXPLOSAO
+        text = "X"
     }
 }
